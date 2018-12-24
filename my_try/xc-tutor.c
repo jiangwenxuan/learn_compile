@@ -30,8 +30,31 @@ enum {
 	DIV, OPEN, READ, CLOS, PRTF, MALC, MEST, MCMP, EXIT
 };
 
+// tokens and classes (operators last and in precedence order)
+enum {
+	Num = 128, Fun, Sys, Glo, Loc, Id, Char, Else, \
+	Enum, If, Int, Return, Sizeof, While, Assign, \
+	Cond, Lor, Lan, Or, Xor, And, Eq, Ne, Lt, Gt, Le, \
+	Ge, Shl, Shr, Add, Sub, Mul, Div, Mod, Inc, Dec, \
+	Brak
+};
+
 void next() {
-	token = *src++;
+	char* last_pos;
+	int hash;
+
+	while(token = *src) {
+		++src;
+
+		if(token == '\n') {
+			++line;
+		}
+		else if(token == '#') {
+			while(*src != 0 && *src != '\n') {
+				src++;
+			}
+		}
+	}
 	return;
 }
 
